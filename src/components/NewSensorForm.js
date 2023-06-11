@@ -59,3 +59,4 @@ class NewSensorForm extends React.Component {
         )
     };
 }
+export default NewSensorForm;
