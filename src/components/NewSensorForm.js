@@ -16,12 +16,12 @@ class NewSensorForm extends React.Component {
 
     componentDidMount() {
         if (this.props.sensor) {
-            const { pk, name, variable, location, arduino_board, plant } = this.props.sensor;
-            this.setState({ pk: pk, name: name, variable });
+            this.setState(this.props.sensor);
         }
     }
 
     onChange = (e) => {
+        console.log(e);
         this.setState({ [e.target.name]: e.target.value });
     };
 
@@ -47,12 +47,29 @@ class NewSensorForm extends React.Component {
         return value === "" ? "" : value;
     };
 
+    // TODO: map the form groups
     render() {
         return (
             <Form onSubmit={this.createSensor}>
                 <FormGroup>
                     <Label for="name">Sensor name: </Label>
                     <Input type="text" name="name" value={this.state.name} onChange={this.onChange} />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="variable">Variable: </Label>
+                    <Input type="text" name="variable" value={this.state.variable} onChange={this.onChange} />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="location">Location: </Label>
+                    <Input type="text" name="location" value={this.state.location} onChange={this.onChange} />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="arduino_board">Arduino Board: </Label>
+                    <Input type="text" name="arduino_board" value={this.state.arduino_board} onChange={this.onChange} />
+                </FormGroup>
+                <FormGroup>
+                    <Label for="plant">Plant: </Label>
+                    <Input type="text" name="plant" value={this.state.plant} onChange={this.onChange} />
                 </FormGroup>
                 <Button>Send</Button>
             </Form>

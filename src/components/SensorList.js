@@ -15,6 +15,9 @@ class SensorList extends Component {
                             <th>Name</th>
                             <th>Variable</th>
                             <th>Location</th>
+                            <th>Arduino Board</th>
+                            <th>Plant</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,6 +27,8 @@ class SensorList extends Component {
                                     <td>{sensor.name}</td>
                                     <td>{sensor.variable}</td>
                                     <td>{sensor.location}</td>
+                                    <td>{sensor.arduino_board}</td>
+                                    <td>{sensor.plant}</td>
                                     <td align="center">
                                         <NewSensorModal
                                             create={false}
@@ -31,7 +36,7 @@ class SensorList extends Component {
                                             resetState={this.props.resetState}
                                         /> &nbsp;&nbsp;
                                         <ConfirmRemovalModal
-                                            pk={sensor.pk}
+                                            pk={sensor.id}
                                             resetState={this.props.resetState}
                                         />
                                     </td>

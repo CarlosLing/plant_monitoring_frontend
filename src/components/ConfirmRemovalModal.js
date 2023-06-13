@@ -16,8 +16,8 @@ class ConfirmRemovalModal extends Component {
         }));
     };
 
-    deleteSensor = pk => {
-        axios.delete(API_URL + pk).then(() => {
+    deleteSensor = (pk) => {
+        axios.delete(API_URL + "/sensors/" + pk).then(() => {
             this.props.resetState();
             this.toggle();
         });

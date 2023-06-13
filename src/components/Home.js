@@ -10,6 +10,10 @@ class Home extends Component {
     state = {
         sensors: [],
     }
+    constructor(props) {
+        super(props);
+        this.resetState = this.resetState.bind(this);
+    }
 
     componentDidMount() {
         this.resetState();
