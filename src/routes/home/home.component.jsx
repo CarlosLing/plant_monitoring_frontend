@@ -7,23 +7,30 @@ const HomeFunctional = () => {
 
     const [searchField, setSearchField] = useState("");
     const [sensors, setSensors] = useState([]);
-    console.log(searchField)
+    const [sensorsFiltered, setSensorsFiltered] = useState([]);
+
 
     useEffect(() => {
-        console.log("Fetch Tensors")
+        console.log("Fetch Sensors");
         axios.get(`${API_URL}/sensors`)
             .then(res => { setSensors(res.data) })
     }, []);
+
+    useEffect(() => {
+        console.log("Filtering Sensors")
+        const newFilteredSensors = sensors.filter(sensor => {
+            return sensor.name.toLowerCase().includes(searchField)
+        });
+        setSensorsFiltered(newFilteredSensors);
+
+    }, [sensors, searchField]);
+
 
 
     const onSearchChange = (e) => {
         const searchFieldString = e.target.value.toLowerCase();
         setSearchField(searchFieldString);
     }
-
-    const filtered_sensors = sensors.filter(sensor => {
-        return sensor.name.toLowerCase().includes(searchField)
-    });
 
     // todo: modularize the search field
     return (
@@ -37,7 +44,7 @@ const HomeFunctional = () => {
                 onChange={onSearchChange}
             />
 
-            {filtered_sensors.map(sensor => (
+            {sensorsFiltered.map(sensor => (
                 <p key={sensor.id}> {sensor.name}</p>
             ))
             }
