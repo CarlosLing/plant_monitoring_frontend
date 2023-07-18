@@ -2,28 +2,33 @@ import { useState, useEffect } from "react"
 
 import axios from "axios";
 import { API_URL } from "../../constants";
+import SensorTable from "../../components/functional/SensorTable/SensorTable.component"
+import NewSensorForm from "../../components/functional/NewSensorForm/NewSensorForm.component";
 
 const HomeFunctional = () => {
 
     const [searchField, setSearchField] = useState("");
     const [sensors, setSensors] = useState([]);
     const [sensorsFiltered, setSensorsFiltered] = useState([]);
+    const [reloadSensors, setReloadSensors] = useState(true);
 
 
     useEffect(() => {
-        console.log("Fetch Sensors");
         axios.get(`${API_URL}/sensors`)
             .then(res => { setSensors(res.data) })
-    }, []);
+    }, [reloadSensors]);
 
     useEffect(() => {
-        console.log("Filtering Sensors")
         const newFilteredSensors = sensors.filter(sensor => {
             return sensor.name.toLowerCase().includes(searchField)
         });
         setSensorsFiltered(newFilteredSensors);
 
     }, [sensors, searchField]);
+
+    const callbackResloadSensors = () => {
+        setReloadSensors(!reloadSensors);
+    }
 
 
 
@@ -48,6 +53,12 @@ const HomeFunctional = () => {
                 <p key={sensor.id}> {sensor.name}</p>
             ))
             }
+            <SensorTable sensors={sensorsFiltered} />
+
+            Sample Form
+            {/* Understand if this is the propper way to do this */}
+            {/* <NewSensorModal callback={callback} setCallback={setCallback} /> */}
+            <NewSensorForm reloadSensors={callbackResloadSensors} />
         </div >
     )
 }
