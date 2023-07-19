@@ -1,4 +1,3 @@
-import "./SensorTable.styles.scss";
 import { Table } from "reactstrap";
 import NewSensorModal from "../NewSensorModal/NewSensorModal.component";
 import RemoveSensorModal from "../RemoveSensorModal/RemoveSensorModal.component";

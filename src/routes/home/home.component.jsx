@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col, Container, Input } from "reactstrap";
 import axios from "axios";
 import { API_URL } from "../../constants";
 import SensorTable from "../../components/functional/SensorTable/SensorTable.component"
+import NewSensorModal from "../../components/functional/NewSensorModal/NewSensorModal.component";
 
-const HomeFunctional = () => {
+const Home = () => {
 
     const [searchField, setSearchField] = useState("");
     const [sensors, setSensors] = useState([]);
@@ -47,7 +48,7 @@ const HomeFunctional = () => {
 
             <Row>
                 <Col>
-                    <input
+                    <Input
                         className={'SeachBox'}
                         type='search'
                         placeholder="Seach Sensors..."
@@ -61,9 +62,10 @@ const HomeFunctional = () => {
                     <SensorTable sensors={sensorsFiltered} callbackReloadSensors={callbackReloadSensors} />
                 </Col>
             </Row>
+
             <Row>
                 <Col>
-                    <newSensorModal reloadSensors={callbackReloadSensors} createSensor={true} />
+                    <NewSensorModal reloadSensors={callbackReloadSensors} createSensor={true} />
                 </Col>
             </Row>
         </Container>
@@ -71,4 +73,4 @@ const HomeFunctional = () => {
     )
 }
 
-export default HomeFunctional
+export default Home;
