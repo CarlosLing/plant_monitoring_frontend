@@ -1,7 +1,9 @@
 import "./SensorTable.styles.scss";
 import { Table } from "reactstrap";
+import NewSensorModal from "../NewSensorModal/NewSensorModal.component";
+import RemoveSensorModal from "../RemoveSensorModal/RemoveSensorModal.component";
 
-const SensorTable = ({ sensors }) => {
+const SensorTable = ({ sensors, callbackReloadSensors }) => {
 
     return (
         <div className="sensor-table">
@@ -13,6 +15,7 @@ const SensorTable = ({ sensors }) => {
                         <th>Location</th>
                         <th>Arduino Board</th>
                         <th>Plant</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,6 +27,10 @@ const SensorTable = ({ sensors }) => {
                                 <td>{sensor.location}</td>
                                 <td>{sensor.arduino_board}</td>
                                 <td>{sensor.plant}</td>
+                                <td>
+                                    <NewSensorModal reloadSensors={callbackReloadSensors} createSensor={false} sensorToEdit={sensor} />
+                                    <RemoveSensorModal reloadSensors={callbackReloadSensors} sensorToEdit={sensor} />
+                                </td>
                                 {/* <td align="center">
                                     <NewSensorModal
                                         create={false}

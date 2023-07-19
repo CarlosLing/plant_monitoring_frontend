@@ -3,25 +3,45 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 
 import axios from "axios";
 import { API_URL } from "../../../constants";
-const NewSensorForm = ({ reloadSensors }) => {
 
-    const [sensor, setSensor] = useState({
+/**
+ * New Sensor Form Component. This component 
+ * @param {Function} reloadSensors 
+ * @returns 
+ */
+const NewSensorForm = ({ reloadSensors, sensorToEdit, createSensor, closeModal }) => {
+
+    var placeholderSensor = {
         pk: 0,
         name: "",
         variable: "",
         location: "",
         arduino_board: "",
         plant: "",
-    });
+    }
+    if (!createSensor) {
+        placeholderSensor = sensorToEdit
+    };
+
+    console.log(placeholderSensor)
+    const [sensor, setSensor] = useState(placeholderSensor);
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post(`${API_URL}/sensors`, sensor)
-            .then(() => {
-                // We need to fetch the sensor data again
-                // TODO: Verify if this is the correct way of triggering the data refresh
-                reloadSensors();
-            });
+        if (createSensor) {
+            axios.post(`${API_URL}/sensors`, sensor)
+                .then(() => {
+                    reloadSensors();
+                    closeModal();
+                });
+        }
+        else {
+            axios.put(`${API_URL}/sensors/${sensor.id}`, sensor)
+                .then(() => {
+                    reloadSensors();
+                    closeModal();
+                });
+        };
     };
 
     const onChange = (e) => {

@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react"
-
+import { Row, Col, Container } from "reactstrap";
 import axios from "axios";
 import { API_URL } from "../../constants";
 import SensorTable from "../../components/functional/SensorTable/SensorTable.component"
-import NewSensorForm from "../../components/functional/NewSensorForm/NewSensorForm.component";
 
 const HomeFunctional = () => {
 
@@ -26,7 +25,7 @@ const HomeFunctional = () => {
 
     }, [sensors, searchField]);
 
-    const callbackResloadSensors = () => {
+    const callbackReloadSensors = () => {
         setReloadSensors(!reloadSensors);
     }
 
@@ -39,27 +38,36 @@ const HomeFunctional = () => {
 
     // todo: modularize the search field
     return (
-        <div>
-            <h1>Home</h1>
+        <Container style={{ marginTop: "20px" }}>
+            <Row>
+                <Col>
+                    <h1>Sensor List</h1>
+                </Col>
+            </Row>
 
-            <input
-                className={'SeachBox'}
-                type='search'
-                placeholder="Seach Sensors..."
-                onChange={onSearchChange}
-            />
+            <Row>
+                <Col>
+                    <input
+                        className={'SeachBox'}
+                        type='search'
+                        placeholder="Seach Sensors..."
+                        onChange={onSearchChange}
+                    />
+                </Col>
+            </Row>
 
-            {sensorsFiltered.map(sensor => (
-                <p key={sensor.id}> {sensor.name}</p>
-            ))
-            }
-            <SensorTable sensors={sensorsFiltered} />
+            <Row>
+                <Col>
+                    <SensorTable sensors={sensorsFiltered} callbackReloadSensors={callbackReloadSensors} />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <newSensorModal reloadSensors={callbackReloadSensors} createSensor={true} />
+                </Col>
+            </Row>
+        </Container>
 
-            Sample Form
-            {/* Understand if this is the propper way to do this */}
-            {/* <NewSensorModal callback={callback} setCallback={setCallback} /> */}
-            <NewSensorForm reloadSensors={callbackResloadSensors} />
-        </div >
     )
 }
 
