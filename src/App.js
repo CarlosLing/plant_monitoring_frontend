@@ -1,14 +1,13 @@
-import React, { Component, Fragment } from "react";
+import { Routes, Route } from 'react-router-dom';
+
 import Home from "./routes/home/home.component";
 
-class App extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Home />
-      </Fragment>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Routes>
+      <Route path='/' index element={<Home />} />
+    </Routes>
+  );
+};
 
 export default App;
