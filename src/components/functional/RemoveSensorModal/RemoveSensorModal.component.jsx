@@ -6,7 +6,6 @@ import { Button } from "reactstrap";
 import { Modal, ModalHeader, ModalFooter } from "reactstrap";
 
 function RemoveSensorModal({ reloadSensors, sensorToEdit }) {
-    console.log("NewSensorModal Render");
     const [modalOpen, setModalOpen] = useState(false);
 
     const setModalOpenTrue = () => {
