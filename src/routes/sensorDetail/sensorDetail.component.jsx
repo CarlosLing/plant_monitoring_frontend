@@ -2,7 +2,7 @@
 import { useParams } from 'react-router-dom';
 import { API_URL } from '../../constants';
 import { useState, useEffect, Fragment } from 'react';
-import { Button } from 'reactstrap';
+// import { Line } from 'react-chartjs-2';
 
 import axios from 'axios';
 
@@ -19,28 +19,53 @@ const SensorDetail = () => {
 
     const { sensorId } = useParams();
 
-    const [sensor, setSensor] = useState([]);
-    const [reloadSensors, setReloadSensors] = useState(true);
-
+    const [sensorData, setSensorData] = useState({ datapoints: [] });
 
     useEffect(() => {
-        axios.get(`${API_URL}/sensors/${sensorId}`)
-            .then(res => { setSensor(res.data) })
-    }, [reloadSensors, sensorId]);
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/sensors/${sensorId}`);
+                console.log(response);
+                console.log(response.data);
+                console.log(sensorData.datapoints.map(point => new Date(point.timestamp).toLocaleString()))
+                setSensorData(response.data);
+                console.log(sensorData);
+            } catch (error) {
+                console.error('Error fetching sensor data:', error);
+            }
+        };
 
-    const callbackReloadSensors = () => {
-        setReloadSensors(!reloadSensors);
-    }
+        fetchData();
+    }, [sensorId]); // Dependency array with URI ensures fetch is called when URI changes
 
 
-    console.log(sensor);
+
+
+    const chartData = {
+        labels: sensorData.datapoints.map(point => new Date(point.timestamp).toLocaleString()),
+        datasets: [
+            {
+                label: sensorData.variable,
+                data: sensorData.datapoints.map(point => point.value),
+                fill: false,
+                backgroundColor: 'rgb(75, 192, 192)',
+                borderColor: 'rgba(75, 192, 192, 0.2)',
+            },
+        ],
+    };
+
 
     return (
         <Fragment>
-            <h1>This is the page for sensor {sensor} </h1>
-            <Button onClick={callbackReloadSensors}>Reload</Button>
+            <h2>Sensor Information</h2>
+            <p>Name: {sensorData.name}</p>
+            <p>Variable: {sensorData.variable}</p>
+            <p>Location: {sensorData.location}</p>
+            <p>Arduino Board: {sensorData.arduino_board}</p>
+            <p>Plant: {sensorData.plant}</p>
+            {/* <Line data={chartData} /> */}
         </Fragment>
-    )
+    );
 
 };
 
