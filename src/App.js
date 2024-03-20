@@ -20,7 +20,6 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="sensor/:sensorId" element={<SensorDetail />} />
-        <Route path="detail" element={<Detail />} />
         <Route path="graph" element={<LineGraph />} />
       </Route>
 
