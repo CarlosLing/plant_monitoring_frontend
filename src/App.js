@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Home from "./routes/home/home.component";
 import SensorDetail from "./routes/sensorDetail/sensorDetail.component";
+import LineGraph from './components/functional/LineGraph/LineGraph.component';
 import Navigation from './components/functional/NavigationBar/NavigationBar.component';
 
 const About = () => {
@@ -19,6 +20,8 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="sensor/:sensorId" element={<SensorDetail />} />
+        <Route path="detail" element={<Detail />} />
+        <Route path="graph" element={<LineGraph />} />
       </Route>
 
     </Routes>
