@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import Home from "./routes/home/home.component";
+import LineGraph from './components/functional/LineGraph/LineGraph.component';
 import Navigation from './components/functional/NavigationBar/NavigationBar.component';
 
 const Detail = () => {
@@ -15,6 +16,7 @@ const App = () => {
       <Route path="/" element={<Navigation />} >
         <Route index element={<Home />} />
         <Route path="detail" element={<Detail />} />
+        <Route path="graph" element={<LineGraph />} />
       </Route>
 
     </Routes>
