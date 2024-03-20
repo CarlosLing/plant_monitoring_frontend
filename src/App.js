@@ -1,21 +1,25 @@
 import { Routes, Route } from 'react-router-dom';
 
 import Home from "./routes/home/home.component";
+import SensorDetail from "./routes/sensorDetail/sensorDetail.component";
 import LineGraph from './components/functional/LineGraph/LineGraph.component';
 import Navigation from './components/functional/NavigationBar/NavigationBar.component';
 
-const Detail = () => {
+const About = () => {
   return (
-    <h1>TODO: Develop Detail page for sensor</h1>
+    <h1>TODO: Develop a page for instructions about this project</h1>
   );
 };
+
+
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigation />} >
         <Route index element={<Home />} />
-        <Route path="detail" element={<Detail />} />
+        <Route path="about" element={<About />} />
+        <Route path="sensor/:sensorId" element={<SensorDetail />} />
         <Route path="graph" element={<LineGraph />} />
       </Route>
 

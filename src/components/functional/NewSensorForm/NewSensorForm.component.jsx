@@ -23,7 +23,6 @@ const NewSensorForm = ({ reloadSensors, sensorToEdit, createSensor, closeModal }
         placeholderSensor = sensorToEdit
     };
 
-    console.log(placeholderSensor)
     const [sensor, setSensor] = useState(placeholderSensor);
 
     const onSubmit = (e) => {

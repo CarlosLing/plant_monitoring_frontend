@@ -1,0 +1,4 @@
+primary: #3F4048
+accent: #4DCCA4
+background: #DBE4E2
+background-accent: #8F9197

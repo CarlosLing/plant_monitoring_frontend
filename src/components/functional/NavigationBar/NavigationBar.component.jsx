@@ -13,8 +13,8 @@ const Navigation = () => {
                     <img className='logo-image' src={logo} alt='Logo error' />
                 </Link>
                 <div className='nav-links-container'>
-                    <Link className='nav-link' to='/detail'>
-                        Sensor Detail
+                    <Link className='nav-link' to='/about'>
+                        ABOUT
                     </Link>
                 </div>
             </div>

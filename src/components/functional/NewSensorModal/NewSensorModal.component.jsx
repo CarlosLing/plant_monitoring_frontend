@@ -5,7 +5,6 @@ import { Button } from "reactstrap";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
 function NewSensorModal({ reloadSensors, createSensor, sensorToEdit }) {
-    console.log("NewSensorModal Render");
     const [modalOpen, setModalOpen] = useState(false);
 
     var heading = "Modify Sensor";
